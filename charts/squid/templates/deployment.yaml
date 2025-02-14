@@ -98,12 +98,12 @@ spec:
             - key: squid.conf
               path: squid.conf
         {{- range $key, $val := .Values.volumeMounts.configmaps }}
-        - name: {{ $key }}
+        - name: {{ replace "." "" $key }}
           configMap:
             name: {{ template "helmproj.fullname" $ }}-vols
         {{- end }}
         {{- range $key, $val := .Values.volumeMounts.secrets }}
-        - name: {{ $key }}
+        - name: {{ replace "." "" $key }}
           secret:
             secretName: {{ template "helmproj.fullname" $ }}-vols
         {{- end }}
